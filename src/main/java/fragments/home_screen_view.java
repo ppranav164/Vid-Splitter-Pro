@@ -55,6 +55,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.arthenica.mobileffmpeg.ExecuteCallback;
 import com.card.splitter_pro.FFmpeg_engine;
 import com.card.splitter_pro.FilePath;
 import com.card.splitter_pro.Notifications;
@@ -153,6 +154,13 @@ public class home_screen_view extends Fragment implements View.OnClickListener  
 
     private Handler handler;
     private Runnable runnable;
+
+
+    public  final int RETURN_CODE_SUCCESS = 0;
+    public  final int RETURN_CODE_CANCEL = 255;
+    private  int lastReturnCode = 0;
+
+
 
     public home_screen_view() {
         // Required empty public constructor
@@ -963,87 +971,52 @@ public class home_screen_view extends Fragment implements View.OnClickListener  
     }
 
 
-
     public void startEncoding(String[] commannds)
     {
-         ffmpeg = FFmpeg.getInstance(getContext());
-         ffmpeg.execute(commannds,new ExecuteBinaryResponseHandler(){
+
+        startExec();
+
+        long executionId = com.arthenica.mobileffmpeg.FFmpeg.executeAsync(commannds, new ExecuteCallback() {
 
             @Override
-            public void onSuccess(String message) {
-                super.onSuccess(message);
+            public void apply(final long executionId, final int returnCode) {
+                if (returnCode == RETURN_CODE_SUCCESS) {
+                    Log.e("ARTHEN_FF", "Command execution completed successfully.");
 
-                Log.e("Video Success","Success");
-                Log.e("Video Success",message);
-
-                runningInteraction.isRunning(false);
-                enableInteraction();
-            }
-
-            @Override
-            public void onProgress(String message) {
-                super.onProgress(message);
-                Log.e("Video Processing",message);
-
-                statusView.setText("Splitting ");
-                changeBtn.setVisibility(View.INVISIBLE);
-                generateButton.setText("Generating...");
-                runningInteraction.isRunning(true);
-                disableInteraction();
-
-                if (isStopped)
-                {
-                    forceStop();
-                    reset();
+                    if (!isStopped) {
+                        splitQues();
+                    }
+                    if (isStopped)
+                    {
+                        forceStop();
+                        reset();
+                    }
+                } else if (returnCode == RETURN_CODE_CANCEL) {
+                    Log.e("ARTHEN_FF", "Command execution cancelled by user.");
+                    statusView.setText("");
+                    enableInteraction();
+                } else {
+                    isStopped = true;
+                    Log.e("ARTHEN_FF", "Execution failed");
+                    statusView.setText("Failed to split");
+                    enableInteraction();
                 }
-
-            }
-
-            @Override
-            public void onFailure(String message) {
-                super.onFailure(message);
-                Log.e("Video Failure",message);
-
-                statusView.setText("Failed to split");
-                runningInteraction.isRunning(false);
-                enableInteraction();
-            }
-
-            @Override
-            public void onStart() {
-                super.onStart();
-                Log.e("Video Processing","Started");
-
-                generateButton.setClickable(false);
-                statusView.setText("Splitting started");
-                generateButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_grey));
-                runningInteraction.isRunning(true);
-                disableInteraction();
-                completedVideos.add(FULL_FILE);
-            }
-
-            @Override
-            public void onFinish() {
-                super.onFinish();
-
-                Log.e("Video Processing","Finished");
-                Log.i("Who is next"," > "+nextSelection);
-
-                if (!isStopped)
-                {
-                    splitQues();
-
-                }else {
-
-                    forceStop();
-                }
-
             }
         });
+
 
     }
 
 
+    public void startExec()
+    {
+        generateButton.setClickable(false);
+        statusView.setText("Splitting started");
+        generateButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_grey));
+        runningInteraction.isRunning(true);
+        disableInteraction();
+        completedVideos.add(FULL_FILE);
+    }
 
 
     public void removeUnnecessaryVideos(){
@@ -1177,6 +1150,8 @@ public class home_screen_view extends Fragment implements View.OnClickListener  
 
 
 
+
+
     public  String[] split(String videoPath,String logoPath,String start,String end)
     {
         String DIR_OUTPUT = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath()+"/Video Splitter";
@@ -1196,20 +1171,21 @@ public class home_screen_view extends Fragment implements View.OnClickListener  
             file.mkdir();
         }
 
-        String[] commands = new String[10];
+        String[] commands = new String[9];
         commands[0] = "-i";
         commands[1] =  videoPath;
         commands[2] = "-ss";
         commands[3] = start;
         commands[4] = "-t";
         commands[5] = end;
-        commands[6] = "-async";
-        commands[7] = "1";
-        commands[8] = "-y";
-        commands[9] =  output;
+        commands[6] = "-c";
+        commands[7] = "copy";
+        commands[8] =  output;
         return commands;
 
     }
+
+
 
 
     public void VideoPlayBack()
