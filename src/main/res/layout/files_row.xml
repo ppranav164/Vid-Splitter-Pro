@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="fragments.settings_view">
+
+    <LinearLayout
+        android:id="@+id/layout_bar"
+        android:background="@drawable/button_white"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:visibility="invisible"
+            android:tag="deselect"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_check"
+            android:id="@+id/check"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:src="@drawable/ic_film"
+            android:id="@+id/icon_view"
+            android:layout_width="70dp"
+            android:layout_height="70dp"/>
+        <TextView
+            android:paddingLeft="20dp"
+            android:id="@+id/dir_text"
+            android:gravity="center_vertical"
+            android:text="My Files"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+</LinearLayout>

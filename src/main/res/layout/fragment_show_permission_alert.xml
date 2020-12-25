@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context="fragments.showPermissionAlert">
+
+
+    <ImageView
+        android:id="@+id/logo_splash"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_splash_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+    <TextView
+        android:id="@+id/logo_text"
+        android:textSize="22sp"
+        android:textColor="@color/indigo"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/logo_splash"
+        android:text="@string/vide_splitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+     <LinearLayout
+         android:layout_margin="5dp"
+         android:background="@color/aplpha_indigo"
+         android:id="@+id/infolayout"
+         android:layout_below="@id/logo_text"
+         android:padding="20dp"
+         android:layout_marginTop="20dp"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+         <TextView
+             android:id="@+id/text_info"
+             android:textColor="@color/black"
+             android:layout_marginTop="20dp"
+             android:gravity="center"
+             android:text="@string/text_permission"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"/>
+     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/open_settings"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/white"
+        android:text="@string/text_settings"
+        android:background="@color/indigo"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/infolayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+</RelativeLayout>

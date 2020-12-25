@@ -1,0 +1,231 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.home_screen_view">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/main_screen"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_below="@id/heading"
+                android:orientation="vertical"
+                android:id="@+id/uploadscreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:visibility="visible"
+                    android:id="@+id/uploader"
+                    android:src="@drawable/upload"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"/>
+                <VideoView
+                    android:id="@+id/videoView"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:foregroundGravity="center"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="250dp"/>
+                <Button
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/change"
+                    android:text="X"
+                    android:visibility="invisible"
+                    android:background="@color/white"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/watermark"
+                    android:src="@drawable/logo"
+                    android:layout_margin="5dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="123dp"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:visibility="invisible"
+                    android:clickable="true"
+                    android:id="@+id/playButton"
+                    android:src="@drawable/ic_play"
+                    android:layout_centerInParent="true"
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:visibility="invisible"
+                android:id="@+id/controllerView"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:padding="5dp"
+                        android:id="@+id/duration"
+                        android:text="00:00"
+                        android:gravity="center"
+                        android:textColor="@color/grey"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_marginRight="20dp"
+                        android:layout_alignParentRight="true"
+                        android:padding="5dp"
+                        android:id="@+id/cduration"
+                        android:text="00:00"
+                        android:gravity="center"
+                        android:textColor="@color/grey"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+
+                <ImageButton
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_start"
+                    android:id="@+id/controller"
+                    android:tag="play"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:layout_below="@id/uploadscreen"
+                android:padding="2dp"
+                android:id="@+id/status"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_below="@id/status"
+                android:padding="3dp"
+                android:id="@+id/desc"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/desc"
+                android:padding="2dp"
+                android:id="@+id/message"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:text="@string/text_message"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_below="@id/message"
+                android:id="@+id/note"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:text="@string/text_maximum"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <LinearLayout
+                android:id="@+id/options"
+                android:layout_below="@id/note"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/option_3"
+                    android:layout_marginTop="5dp"
+                    android:text="3 Videos"
+                    android:tag="3"
+                    android:background="@drawable/grey_button_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+                </Button>
+
+                <Button
+                    android:id="@+id/option_2"
+                    android:layout_marginTop="5dp"
+                    android:text="2 Videos"
+                    android:tag="2"
+                    android:background="@drawable/grey_button_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+                </Button>
+
+                <TextView
+                    android:gravity="center"
+                    android:text="Or"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:visibility="gone"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:id="@+id/option_custom"
+                    android:text="4"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:layout_height="60dp">
+                </EditText>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:id="@+id/optionSpinner"
+                    android:gravity="center"
+                    android:background="@android:color/transparent"
+                    android:layout_gravity="center"
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="center"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:visibility="invisible"
+                android:layout_below="@id/options"
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/generate"
+                    android:text="Generate Split"
+                    android:background="@color/indigo"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
